@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { getUserSession } from "@/lib/session";
 
 /**
  * @route POST /api/post
@@ -8,9 +9,20 @@ import { NextResponse } from "next/server";
  */
 export async function POST(request: Request) {
   try {
-    const { title, content, userId } = await request.json();
+    const session = await getUserSession();
 
-    if (!title || !content || !userId) {
+    if (!session) {
+      return NextResponse.json(
+        {
+          message: "Unatuhorized",
+        },
+        { status: 401 },
+      );
+    }
+    const { title, content } = await request.json();
+    const userId = session.sub
+    console.log(userId)
+    if (!title || !content ) {
       return NextResponse.json(
         {
           message: "Title, content, and userId are required",
@@ -75,5 +87,3 @@ export async function GET() {
     });
   }
 }
-
-
