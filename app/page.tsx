@@ -6,7 +6,7 @@ type Post = {
   id: string | number;
   [key: string]: unknown;
   title: string;
-    content: string;
+  content: string;
 };
 
 const getPosts = async ()=>{

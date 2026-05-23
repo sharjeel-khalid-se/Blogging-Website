@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
@@ -12,11 +12,13 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const token = localStorage.getItem("auth_token")
-  if(token){
-    router.push("/")
-    return;
-  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      router.push("/");
+    }
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

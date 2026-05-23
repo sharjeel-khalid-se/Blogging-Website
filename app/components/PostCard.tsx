@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import {MessageSquare } from "lucide-react";
-import { useEffect, useState } from "react";
+import { MessageSquare } from "lucide-react";
 
 type PostCardProps = {
   post: {
-    id: string;
+    id: string | number;
     title: string;
     content: string;
   };
