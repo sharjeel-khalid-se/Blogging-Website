@@ -41,7 +41,10 @@ export async function POST(request: Request) {
     );
 
     const cookieStore = await cookies();
-    cookieStore.set("auth_token", token);
+    cookieStore.set("auth_token", token, {
+      maxAge : 60 * 60, // 1 hour
+      httpOnly: true,
+    });
 
     return NextResponse.json(
       {

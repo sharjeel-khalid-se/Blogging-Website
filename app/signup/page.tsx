@@ -55,7 +55,7 @@ const Page = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center gap-10 h-screen w-full mt-10">
+    <div className="flex flex-col items-center justify-center gap-10 h-screen w-full ">
       <div className="flex flex-col items-center justify-center gap-5 rounded-2xl shadow-lg p-10 w-full max-w-md">
         <h1 className="text-3xl font-bold text-indigo-400">Blog</h1>
         <h2 className="text-2xl font-bold">Create an Account</h2>
