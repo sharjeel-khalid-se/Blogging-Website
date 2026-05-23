@@ -4,6 +4,7 @@ import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
+
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
@@ -18,10 +19,15 @@ export async function POST(request: Request) {
       where: { email },
     });
 
+    if (!user) {
+      return NextResponse.json(
+        { message: "Invalid Credential" },
+        { status: 401 },
+      );
+    }
 
-    const passwordTrue = await compare(password, user!.password)
-
-    if (!user || !passwordTrue) {
+        const passwordTrue = await compare(password, user.password)
+    if (!passwordTrue) {
       return NextResponse.json(
         { message: "Invalid Credential" },
         { status: 401 },
